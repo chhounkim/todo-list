@@ -1,24 +1,23 @@
 import './style.css';
 import {format} from 'date-fns';
-import {addTask, todayTask} from './tasks.js'
+import {addTask, todayTask, getTask} from './tasks.js'
 import {listTask} from './list'
 
 let currentNav = 'Today';
 
 const formModal = document.querySelector('.modal');
-
 const addTaskBtn = document.querySelector('#addTask');
+const addFormButton = document.querySelector('.addButton');
+const cancelFormButton = document.querySelector('.cancelButton');
+
 addTaskBtn.addEventListener('click', () => {
     formModal.style.display = 'flex';
 });
-
-const addFormButton = document.querySelector('.addButton');
 addFormButton.addEventListener('click', () => {
     formModal.style.display = 'none';
     submitForm();
+    listTask(getTask(currentNav));
 })
-
-const cancelFormButton = document.querySelector('.cancelButton');
 cancelFormButton.addEventListener('click', () => {
     formModal.style.display = 'none';
 });
@@ -31,10 +30,11 @@ sidebarLink.forEach((link) => {
         })
         link.classList.add('active');
         currentNav = e.target.textContent;
+        listTask(getTask(currentNav));
     })
 })
 
-listTask(todayTask());
+listTask(getTask("Today"));
 
 function submitForm() {
     let taskTitle = document.querySelector('#task-title').value;
