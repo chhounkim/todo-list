@@ -9,21 +9,46 @@
     <title>Todo List</title>
 </head>
 <body>
-    <div class="form">
-        <div class="form-item">
-            <label for="task-name">Task Name</label>
-            <input type="text" id="task-name">
+    <div class="modal">
+        <div class="form">
+            <div class="form-item">
+                <label for="task-title">Task Name</label>
+                <input type="text" id="task-title">
+            </div>
+            <div class="form-item">
+                <label for="description">Description</label>
+                <input type="text" id="description">
+            </div>
+            <div class="form-item">
+                <label for="due-date">Due Date</label>
+                <input type="datetime" id="due-date">
+            </div>
+            <div class="form-item priority">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                  </select>
+            </div>
+            <div class="form-buttons">
+                <button class="addButton">Add</button>
+                <button class="cancelButton">Cancel</button>
+            </div>
         </div>
     </div>
+
+    <!-- Body -->
     <div class="grid-container">
         <header>
             <h1>Todo List</h1>
+            <button id="addTask">Add Task</button>
         </header>
         <aside>
             <ul>
                 <li><a href="#">Today</a></li>
                 <li><a href="#">All</a></li>
-                <h3><i class="fa-solid fa-chevron-down"></i> Project List</h3>
+                <h3>Project List</h3>
                 <ul>
                     <li><a href="#">Reminder</a></li>
                     <li><a href="#">School</a></li>
@@ -33,8 +58,15 @@
         <div class="content">
             <ul class="list">
                 <li class="list-item">
-                    <span>asd</span>
-                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                    <div class="left-item">
+                        <input type="checkbox" name="isComplete" id="isComplete">
+                        <span>Task Name</span>
+                    </div>
+                    <div class="right-item">
+                        <a href="#"><i class="fa-solid fa-edit"></i></a>
+                        <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                    </div>
+                    
                 </li>
             </ul>
         </div>
