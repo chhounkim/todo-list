@@ -21,7 +21,11 @@
             </div>
             <div class="form-item">
                 <label for="due-date">Due Date</label>
-                <input type="datetime" id="due-date">
+                <input type="date" id="due-date">
+            </div>
+            <div class="form-item">
+                <label for="due-time">Due Time</label>
+                <input type="time" id="due-time">
             </div>
             <div class="form-item priority">
                 <label for="priority">Priority</label>
@@ -31,9 +35,9 @@
                     <option value="High">High</option>
                   </select>
             </div>
-            <div class="form-buttons">
-                <button class="addButton">Add</button>
-                <button class="cancelButton">Cancel</button>
+            <div class="buttons">
+                <button class="addButton" value="1">Add</button>
+                <button class="cancelButton" value="2">Cancel</button>
             </div>
         </div>
     </div>
@@ -45,19 +49,21 @@
             <button id="addTask">Add Task</button>
         </header>
         <aside>
-            <ul>
-                <li><a href="#">Today</a></li>
-                <li><a href="#">All</a></li>
-                <h3>Project List</h3>
+            <div class="side-container">
                 <ul>
-                    <li><a href="#">Reminder</a></li>
-                    <li><a href="#">School</a></li>
+                    <li><a href="#" class="task-filter active">Today</a></li>
+                    <li><a href="#" class="task-filter">All</a></li>
+                    <h3>Project List</h3>
+                    <ul class="project-list">
+                        <li><a href="#" class="task-filter">Reminder</a></li>
+                        <li><a href="#" class="task-filter">School</a></li>
+                    </ul>
                 </ul>
-            </ul>
+            </div>
         </aside>
         <div class="content">
             <ul class="list">
-                <li class="list-item">
+                <!-- <li class="list-item">
                     <div class="left-item">
                         <input type="checkbox" name="isComplete" id="isComplete">
                         <span>Task Name</span>
@@ -66,8 +72,7 @@
                         <a href="#"><i class="fa-solid fa-edit"></i></a>
                         <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                     </div>
-                    
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

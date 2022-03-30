@@ -34,14 +34,28 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    background: rgb(218, 52, 52);
 }
 
 header h1 {
     font-size: 26px;
+    color: white;
 }
+
+#addTask {
+    padding: 6px 20px;
+    font-size: 14px;
+}
+
+/* Sidebar */
 
 aside {
     grid-area: sidebar;
+}
+
+.side-container {
+    display: flex;
+    justify-content: center;
 }
 
 ul {
@@ -51,7 +65,16 @@ ul {
 aside ul {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
+    padding: 10px 30px;
+    width: 100%;
+}
+
+a.active {
+    background: lightgray;
+    border: 1px solid black;
+    padding: 5px 30px;
+    border-radius: 10px;
 }
 
 aside ul li {
@@ -61,23 +84,32 @@ aside ul li {
 
 aside ul li a {
     color: black;
+    height: 100%;
+    width: 100%;
+}
+
+aside ul h3 {
+    font-size: 18px;
+    margin-top: 18px;
+    text-decoration: underline;
 }
 
 a {
     text-decoration: none;
 }
 
-aside ul h3 {
-    font-size: 18px;
-    margin-top: 15px;
-    text-decoration: underline;
-}
-
 /* Task List */
 
 .content {
     grid-area: tasklist;
-    padding: 20px
+    padding: 20px;
+}
+
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .list-item {
@@ -87,7 +119,16 @@ aside ul h3 {
     background: white;
     padding: 10px 15px;
     border-radius: 0px;
+}
+
+.list-item.low-priority {
     border-left: 4px solid rgb(0, 187, 0);
+}
+.list-item.medium-priority {
+    border-left: 4px solid rgb(255, 177, 9);
+}
+.list-item.high-priority {
+    border-left: 4px solid rgb(255, 95, 3);
 }
 
 /* Task Item  */
@@ -105,6 +146,11 @@ aside ul h3 {
     font-size: 16px;
 }
 
+.list-item .taskComplete {
+    text-decoration: line-through;
+    color: gray;
+}
+
 .list-item .right-item {
     display: flex;
     flex-direction: row;
@@ -115,6 +161,11 @@ aside ul h3 {
 
 .list-item .right-item a {
     color: black;
+    margin-left: 5px;
+}
+
+.fa-trash-can {
+    color: orangered;
 }
 
 
@@ -173,7 +224,7 @@ select#priority {
     border: 1px solid lightgray;
 }
 
-.form-buttons {
+.buttons {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -182,7 +233,7 @@ select#priority {
     margin-top: 10px;
 }
 
-.form-buttons button {
+.buttons button {
     color: white;
     padding: 5px 20px;
     width: 50%;
@@ -191,11 +242,11 @@ select#priority {
     border-radius: 4px;
 }
 
-.form-buttons button:hover {
+.buttons button:hover {
     opacity: 0.8;
 }
 
-.form-buttons button:active {
+.buttons button:active {
     transform: translateY(2px);
 }
 
