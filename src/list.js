@@ -1,6 +1,8 @@
-import { saveTask } from "./tasks";
+import { editButtonPressed } from ".";
+import { saveTask, getProjects } from "./tasks";
 
 let todolist = document.querySelector('.list');
+let projectList = document.querySelector('.project-list');
 
 const listTask = (listArr) => {
     while (todolist.firstChild) {
@@ -39,6 +41,11 @@ const listTask = (listArr) => {
         let editButton = document.createElement('a');
         editButton.href = '#';
         editButton.innerHTML = '<i class="fa-solid fa-edit"></i>';
+        editButton.classList.add('edit-task');
+        editButton.addEventListener('click', () => {
+            editButtonPressed(index);
+        })
+
 
         let trashButton = document.createElement('a');
         trashButton.href = '#';
@@ -65,4 +72,51 @@ const listTask = (listArr) => {
     
 }
 
-export {listTask};
+const listProject = (projectArr) => {
+    while (projectList.firstChild) {
+        projectList.removeChild(projectList.firstChild);
+    }
+    projectArr.forEach((item) => {
+        let listItem = document.createElement('li');
+
+        let anchorTag = document.createElement('a');
+        anchorTag.href = '#';
+        anchorTag.classList.add('task-filter');
+        anchorTag.textContent = item;
+
+        listItem.appendChild(anchorTag);
+
+        projectList.appendChild(listItem);
+    })
+}
+
+const formProjectList = (projectArr) => {
+    let selectInput = document.querySelector('#project');
+
+    while (selectInput.firstChild) {
+        selectInput.removeChild(selectInput.firstChild);
+    }
+
+    // <option value="" selected disabled hidden>Select an Option</option>
+    let defaultOption = document.createElement('option');
+    defaultOption.value = ""
+    defaultOption.textContent = "Select an Option";
+    defaultOption.setAttribute('selected', '');
+    defaultOption.setAttribute('disabled', '');
+    defaultOption.setAttribute('hidden', '');
+    selectInput.appendChild(defaultOption);
+
+
+    projectArr.forEach((item) => {
+        let option = document.createElement('option');
+        option.value = item;
+        option.textContent = item;
+
+        selectInput.appendChild(option);
+    })
+
+
+}
+
+
+export {listTask, listProject, formProjectList};

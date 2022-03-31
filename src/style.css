@@ -15,10 +15,10 @@ body {
     height: 100%;
     display: grid;
     grid-template-areas: 
-    'header header header header'
-    'sidebar tasklist tasklist tasklist'
-    'sidebar tasklist tasklist tasklist';
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    'header header header header header'
+    'sidebar tasklist tasklist tasklist tasklist'
+    'sidebar tasklist tasklist tasklist tasklist';
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 60px 1fr 1fr;
     gap: 1px;
 }
@@ -42,7 +42,7 @@ header h1 {
     color: white;
 }
 
-#addTask {
+#addTask, #addProject {
     padding: 6px 20px;
     font-size: 14px;
 }
@@ -170,7 +170,7 @@ a {
 
 
 /* Modal and Form */
-.modal {
+.modal, .project-modal {
     display: none;
     justify-content: center;
     align-items: center;
@@ -181,7 +181,7 @@ a {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.form {
+.form, .project-form {
     background-color: #fefefe;
     padding: 20px;
     width: max(30%, 300px);
@@ -212,13 +212,13 @@ a {
     padding: 5px;
 }
 
-.priority {
+.select-input {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-select#priority {
+select#priority, select#project {
     padding: 5px 10px;
     border-radius: 6px;
     border: 1px solid lightgray;
@@ -250,10 +250,10 @@ select#priority {
     transform: translateY(2px);
 }
 
-.addButton {
+.addButton, .addProjectButton {
     background: #4CAF50;
 }
 
-.cancelButton {
+.cancelButton, .cancelProjectButton {
     background: rgb(255, 99, 42);
 }
