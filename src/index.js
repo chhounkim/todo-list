@@ -1,6 +1,6 @@
 import './style.css';
 import {format} from 'date-fns';
-import {addTask, getTask, getSpecificTask, updateTask} from './tasks.js';
+import {addTask, getTask, updateTask} from './tasks.js';
 import {getProjects, addProject} from './project';
 import {formProjectList, listProject, listTask} from './list'
 
@@ -29,7 +29,6 @@ newTaskButton.addEventListener('click', () => {
     formModal.style.display = 'flex';
     clearFormInput();
     formProjectList(getProjects());
-    sidebarSwitching();
 });
 
 addFormButton.addEventListener('click', () => {
@@ -72,7 +71,6 @@ sidebarLink.forEach((link) => {
         })
         link.classList.add('active');
         currentNav = e.target.textContent;
-        activeNav = link;
         listTask(getTask(currentNav));
     })
 })
@@ -82,10 +80,10 @@ function setCurrentNav(input) {
 }
 
 // Function for Edit button event
-function editButtonPressed(index) {
+function editButtonPressed(item) {
     editMode = true;
-    currentlyEdited = index;
-    editForm(getSpecificTask(index, index));
+    currentlyEdited = item;
+    editForm(item);
 }
 
 // Fill form when task is edited
@@ -106,7 +104,7 @@ function editForm(task) {
 }
 
 // Add Task or Update Task
-function submitTaskForm(index) {
+function submitTaskForm(oldItem) {
     let taskTitle = document.querySelector('#task-title').value;
     let description = document.querySelector('#description').value;
     let dueDate = document.querySelector('#due-date').value;
@@ -115,7 +113,7 @@ function submitTaskForm(index) {
     let priority = document.querySelector('#priority').value;
     let datetime = format(new Date(dueDate + " " + dueTime), 'yyyy-MM-dd HH:MM');
     if (editMode) {
-        updateTask(taskTitle, description, datetime, project, priority, false, index);
+        updateTask(taskTitle, description, datetime, project, priority, oldItem.isComplete, oldItem);
     } else {
         addTask(taskTitle, description, datetime, project, priority, false);
     }

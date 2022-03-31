@@ -1,4 +1,5 @@
 import {compareAsc, endOfDay, format} from "date-fns";
+import _ from "lodash";
 
 class task {
     constructor(title, description, duedate, project, priority, isComplete) {
@@ -28,9 +29,8 @@ const saveTask = (taskArr) => {
     localStorage.setItem('Todolist Task', JSON.stringify(taskArr));
 }
 
-const updateTask = (title, description, duedate, project, priority, isComplete, index) => {
+const updateTask = (title, description, duedate, project, priority, isComplete, oldItem) => {
     let currentTask = new task(title, description, duedate, project, priority, isComplete);
-    console.log(currentTask);
     let taskArr = [];
     let getLocalStorage = localStorage.getItem('Todolist Task');
     if (getLocalStorage == null) {
@@ -38,7 +38,8 @@ const updateTask = (title, description, duedate, project, priority, isComplete, 
     } else {
         taskArr = JSON.parse(getLocalStorage);
     }
-    currentTask.isComplete = taskArr[index].isComplete;
+    let index = getTaskIndex(oldItem);
+    console.log(getTaskIndex(oldItem))
     taskArr.splice(index, 1, currentTask);
     saveTask(taskArr);
 }
@@ -64,7 +65,7 @@ const getTask = (filter) => {
     return taskArr;
 }
 
-const getSpecificTask = (index) => {
+const getTaskIndex = (oldItem) => {
     let taskArr = [];
     let getLocalStorage = localStorage.getItem('Todolist Task');
     if (getLocalStorage == null) {
@@ -72,7 +73,14 @@ const getSpecificTask = (index) => {
     } else {
         taskArr = JSON.parse(getLocalStorage);
     }
-    return taskArr[index];
+    let sIndex;
+    taskArr.forEach((task, index) => {
+        if (_.isEqual(oldItem, task)) {
+            sIndex = index;
+            return sIndex;
+        }
+    })
+    return sIndex;
 }
 
 
@@ -92,4 +100,4 @@ const projectTask = (taskArr, projectName) => {
 }
 
 
-export {addTask, saveTask, getTask, getSpecificTask, updateTask};
+export {addTask, saveTask, getTask, updateTask};

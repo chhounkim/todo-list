@@ -43,7 +43,7 @@ const listTask = (listArr) => {
         editButton.innerHTML = '<i class="fa-solid fa-edit"></i>';
         editButton.classList.add('edit-task');
         editButton.addEventListener('click', () => {
-            editButtonPressed(index);
+            editButtonPressed(item);
         })
 
 
