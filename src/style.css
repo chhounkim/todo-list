@@ -154,7 +154,7 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .list-item .right-item a {
