@@ -101,3 +101,8 @@ typings/
 
 # TernJS port file
 .tern-port
+
+# Ignore macOS file
+.DS_Store
+
+dist/
