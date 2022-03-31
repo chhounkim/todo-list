@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="./main.js" defer></script>
+    <title>Todo List</title>
+</head>
+<body>
+    <!-- Modal for Adding Task -->
+    <div class="modal">
+        <div class="form">
+            <div class="form-item">
+                <label for="task-title">Task Name</label>
+                <input type="text" id="task-title">
+            </div>
+            <div class="form-item">
+                <label for="description">Description</label>
+                <input type="text" id="description">
+            </div>
+            <div class="form-item">
+                <label for="due-date">Due Date</label>
+                <input type="date" id="due-date">
+            </div>
+            <div class="form-item">
+                <label for="due-time">Due Time</label>
+                <input type="time" id="due-time">
+            </div>
+            <div class="form-item select-input">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                  </select>
+            </div>
+            <div class="form-item select-input">
+                <label for="project">Project</label>
+                <select name="project" id="project">
+
+                </select>
+            </div>
+            <div class="buttons">
+                <button class="addButton">Add</button>
+                <button class="cancelButton">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for Adding Project -->
+    <div class="project-modal">
+        <div class="project-form">
+            <div class="form-item">
+                <label for="project-name">Project Name</label>
+                <input type="text" id="project-name">
+                <div class="buttons">
+                    <button class="addProjectButton">Add</button>
+                    <button class="cancelProjectButton">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="grid-container">
+        <header>
+            <h1>Todo List</h1>
+            <div class="nav-buttons">
+                <button id="addProject">Add Project</button>
+                <button id="addTask">Add Task</button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside>
+            <div class="side-container">
+                <ul>
+                    <li><a href="#" class="task-filter active">Today</a></li>
+                    <li><a href="#" class="task-filter">All</a></li>
+                    <h3>Project List</h3>
+                    <ul class="project-list">
+                        
+                    </ul>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Task Body -->
+        <div class="content">
+            <ul class="list">
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
