@@ -1,22 +1,16 @@
 import './style.css';
-import {endOfDay, format} from 'date-fns';
-import {addTask, getTask, addProject, getProjects, getSpecificTask} from './tasks.js'
+import {format} from 'date-fns';
+import {addTask, getTask, getSpecificTask, updateTask} from './tasks.js';
+import {getProjects, addProject} from './project';
 import {formProjectList, listProject, listTask} from './list'
+
 
 let currentNav = 'Today';
 let editMode = false;
+let currentlyEdited = 0;
+
 listTask(getTask("Today"));
 listProject(getProjects());
-
-let datepicker1 = document.querySelector('#due-date');
-let timepicker1 = document.querySelector('#due-time');
-let dateToday = format(endOfDay(new Date()), "yyyy-MM-dd");
-let timeToday = format(endOfDay(new Date()), "HH:mm");
-datepicker1.value = dateToday;
-timepicker1.value = timeToday;
-console.log(dateToday);
-
-
 
 const formModal = document.querySelector('.modal');
 const projectModal = document.querySelector('.project-modal');
@@ -28,33 +22,45 @@ const cancelFormButton = document.querySelector('.cancelButton');
 const addProjectButton = document.querySelector('.addProjectButton');
 const cancelProjectButton = document.querySelector('.cancelProjectButton');
 
+// Task Form
 newTaskButton.addEventListener('click', () => {
+    addFormButton.textContent = 'Add';
+    editMode = false;
     formModal.style.display = 'flex';
+    clearFormInput();
     formProjectList(getProjects());
 });
 
-newProjectButton.addEventListener('click', () => {
-    projectModal.style.display = 'flex';
-})
-
 addFormButton.addEventListener('click', () => {
     formModal.style.display = 'none';
-    submitTaskForm();
+    if (editMode) {
+        submitTaskForm(currentlyEdited);
+    } else {
+        submitTaskForm();
+    }
     listTask(getTask(currentNav));
 })
 cancelFormButton.addEventListener('click', () => {
     formModal.style.display = 'none';
 });
 
+// Project Form
+newProjectButton.addEventListener('click', () => {
+    projectModal.style.display = 'flex';
+})
+
 addProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'none';
     submitProjectForm();
     listProject(getProjects());
+    document.querySelector('#project-name').value = "";
 })
 cancelProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'none';
+    document.querySelector('#project-name').value = "";
 });
 
+// Sidebar
 const sidebarLink = document.querySelectorAll('.task-filter');
 sidebarLink.forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -67,19 +73,14 @@ sidebarLink.forEach((link) => {
     })
 })
 
-const editTaskButtons = document.querySelectorAll('.edit-task');
-editTaskButtons.forEach((editBtn) => {
-    editBtn.addEventListener('click', (e) => {
-        
-    })
-})
-
+// Function for Edit button event
 function editButtonPressed(index) {
     editMode = true;
-    editForm(getSpecificTask(index));
+    currentlyEdited = index;
+    editForm(getSpecificTask(index, index));
 }
 
-
+// Fill form when task is edited
 function editForm(task) {
     if (editMode) {
         addFormButton.textContent = 'Update';
@@ -96,7 +97,8 @@ function editForm(task) {
     }
 }
 
-function submitTaskForm() {
+// Add Task or Update Task
+function submitTaskForm(index) {
     let taskTitle = document.querySelector('#task-title').value;
     let description = document.querySelector('#description').value;
     let dueDate = document.querySelector('#due-date').value;
@@ -105,13 +107,15 @@ function submitTaskForm() {
     let priority = document.querySelector('#priority').value;
     let datetime = format(new Date(dueDate + " " + dueTime), 'yyyy-MM-dd HH:MM');
     if (editMode) {
-
+        updateTask(taskTitle, description, datetime, project, priority, false, index);
     } else {
         addTask(taskTitle, description, datetime, project, priority, false);
     }
     clearFormInput();
+    editMode = false;
 }
 
+// Clear form after form submission
 function clearFormInput() {
     document.querySelector('#task-title').value = "";
     document.querySelector('#description').value = "";

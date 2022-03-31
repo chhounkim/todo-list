@@ -1,4 +1,4 @@
-import {compareAsc, endOfDay, format, isEqual } from "date-fns";
+import {compareAsc, endOfDay, format} from "date-fns";
 
 class task {
     constructor(title, description, duedate, project, priority, isComplete) {
@@ -13,20 +13,34 @@ class task {
 
 const addTask = (title, description, duedate, project, priority, isComplete) => {
     let newTask = new task(title, description, duedate, project, priority, isComplete);
-    let listArr = [];
-    console.log(newTask);
+    let taskArr = [];
     let getLocalStorage = localStorage.getItem('Todolist Task');
     if (getLocalStorage == null) {
-        listArr = [];
+        taskArr = [];
     } else {
-        listArr = JSON.parse(getLocalStorage);
+        taskArr = JSON.parse(getLocalStorage);
     }
-    listArr.push(newTask);
-    localStorage.setItem('Todolist Task', JSON.stringify(listArr));
+    taskArr.push(newTask);
+    saveTask(taskArr);
 }
 
 const saveTask = (taskArr) => {
     localStorage.setItem('Todolist Task', JSON.stringify(taskArr));
+}
+
+const updateTask = (title, description, duedate, project, priority, isComplete, index) => {
+    let currentTask = new task(title, description, duedate, project, priority, isComplete);
+    console.log(currentTask);
+    let taskArr = [];
+    let getLocalStorage = localStorage.getItem('Todolist Task');
+    if (getLocalStorage == null) {
+        taskArr = [];
+    } else {
+        taskArr = JSON.parse(getLocalStorage);
+    }
+    currentTask.isComplete = taskArr[index].isComplete;
+    taskArr.splice(index, 1, currentTask);
+    saveTask(taskArr);
 }
 
 const getTask = (filter) => {
@@ -77,29 +91,5 @@ const projectTask = (taskArr, projectName) => {
     })
 }
 
-const getProjects = () => {
-    let projectArr = [];
-    let getLocalStorage = localStorage.getItem('Todolist Project');
-    if (getLocalStorage == null) {
-        projectArr = ['Reminder'];
-        localStorage.setItem('Todolist Project', JSON.stringify(projectArr));
-    } else {
-        projectArr = JSON.parse(getLocalStorage);
-    }
-    return projectArr;
-}
 
-const addProject = (project) => {
-    let projectArr = [];
-    let getLocalStorage = localStorage.getItem("Todolist Project");
-    if (getLocalStorage == null) {
-        projectArr = [];
-    } else {
-        projectArr = JSON.parse(getLocalStorage);
-    }
-    projectArr.push(project);
-    localStorage.setItem("Todolist Project", JSON.stringify(projectArr));
-}
-
-
-export {addTask, saveTask, getTask, getProjects, addProject, getSpecificTask};
+export {addTask, saveTask, getTask, getSpecificTask, updateTask};
