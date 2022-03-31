@@ -39,7 +39,6 @@ const updateTask = (title, description, duedate, project, priority, isComplete, 
         taskArr = JSON.parse(getLocalStorage);
     }
     let index = getTaskIndex(oldItem);
-    console.log(getTaskIndex(oldItem))
     taskArr.splice(index, 1, currentTask);
     saveTask(taskArr);
 }
