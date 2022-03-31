@@ -29,6 +29,7 @@ newTaskButton.addEventListener('click', () => {
     formModal.style.display = 'flex';
     clearFormInput();
     formProjectList(getProjects());
+    sidebarSwitching();
 });
 
 addFormButton.addEventListener('click', () => {
@@ -53,7 +54,9 @@ addProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'none';
     submitProjectForm();
     listProject(getProjects());
+    listTask(getTask(currentNav));
     document.querySelector('#project-name').value = "";
+    location.reload();
 })
 cancelProjectButton.addEventListener('click', () => {
     projectModal.style.display = 'none';
@@ -69,9 +72,14 @@ sidebarLink.forEach((link) => {
         })
         link.classList.add('active');
         currentNav = e.target.textContent;
+        activeNav = link;
         listTask(getTask(currentNav));
     })
 })
+
+function setCurrentNav(input) {
+    currentNav = input;
+}
 
 // Function for Edit button event
 function editButtonPressed(index) {
@@ -130,4 +138,4 @@ function submitProjectForm() {
     addProject(projectName);
 }
 
-export {editButtonPressed};
+export {editButtonPressed, setCurrentNav};

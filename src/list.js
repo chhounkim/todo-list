@@ -1,5 +1,5 @@
-import { editButtonPressed } from ".";
-import { saveTask, getProjects } from "./tasks";
+import { editButtonPressed, setCurrentNav} from ".";
+import { saveTask, getProjects, getTask } from "./tasks";
 
 let todolist = document.querySelector('.list');
 let projectList = document.querySelector('.project-list');
@@ -83,6 +83,15 @@ const listProject = (projectArr) => {
         anchorTag.href = '#';
         anchorTag.classList.add('task-filter');
         anchorTag.textContent = item;
+        anchorTag.addEventListener('click', (e) => {
+            const sidebarLink = document.querySelectorAll('.task-filter');
+            sidebarLink.forEach(thisLink => {
+                thisLink.classList.remove('active');
+            })
+            anchorTag.classList.add('active');
+            setCurrentNav(e.target.textContent);
+            listTask(getTask(e.target.textContent))
+        })
 
         listItem.appendChild(anchorTag);
 
